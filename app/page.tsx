@@ -296,11 +296,13 @@ export default function LoginPage() {
             <SheetTrigger asChild>
               <Button
                 variant="outline"
-                className="fixed bottom-6 right-6 h-16 w-16 rounded-full bg-[#990000] p-0 text-white shadow-lg hover:bg-[#cc0000] focus:ring-2 focus:ring-[#990000] focus:ring-offset-2"
+                className="fixed bottom-6 right-6 h-16 w-16 z-10 rounded-full bg-[#990000] p-0 text-white shadow-lg hover:bg-[#cc0000] focus:ring-2 focus:ring-[#990000] focus:ring-offset-2"
               >
                 <Bell className="h-8 w-8" />
                 <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-[#990000]">
                   {notifications.length}
+                </span>
+                <span className="absolute -right-2 animate-ping z-0 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-[#990000]">
                 </span>
               </Button>
             </SheetTrigger>
