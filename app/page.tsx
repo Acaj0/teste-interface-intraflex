@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image"
-import { Calendar } from "@/components/ui/calendar"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -29,9 +28,6 @@ type Notification = {
 }
 
 export default function LoginPage() {
-  useEffect(() => {
-    console.log("Component rendered")
-  }, [])
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   // Add state for notifications
@@ -49,6 +45,12 @@ export default function LoginPage() {
       date: "Há 1 hora",
     },
   ])
+  const [currentTime, setCurrentTime] = useState(new Date())
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000)
+    return () => clearInterval(timer)
+  }, [])
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -106,6 +108,10 @@ export default function LoginPage() {
         </div>
         <div className="flex items-center gap-2">
           <Button className="md:flex hidden bg-[#990000] w-44 hover:bg-[#cc0000]">Login</Button>
+          <div className="hidden md:flex items-center text-gray-600">
+            <Clock className="h-5 w-5 mr-2" />
+            <span>{currentTime.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span>
+          </div>
         </div>
       </header>
 
@@ -118,7 +124,7 @@ export default function LoginPage() {
         <nav className="flex h-full flex-col items-center lg:group-hover:items-start gap-4 py-4">
           <Button
             variant="ghost"
-            className="w-full justify-center lg:group-hover:justify-start  text-gray-600 hover:text-[#990000] transition-all duration-300"
+            className="w-full justify-start text-gray-600 hover:text-[#990000] transition-all duration-300"
           >
             <Home className="h-5 w-5 lg:mr-2" />
             <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
@@ -127,7 +133,7 @@ export default function LoginPage() {
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-center lg:group-hover:justify-start  text-gray-600 hover:text-[#990000] transition-all duration-300"
+            className="w-full justify-start text-gray-600 hover:text-[#990000] transition-all duration-300"
           >
             <FileText className="h-5 w-5 lg:mr-2" />
             <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
@@ -136,7 +142,7 @@ export default function LoginPage() {
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-center lg:group-hover:justify-start  text-gray-600 hover:text-[#990000] transition-all duration-300"
+            className="w-full justify-start text-gray-600 hover:text-[#990000] transition-all duration-300"
           >
             <Mail className="h-5 w-5 lg:mr-2" />
             <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
@@ -145,7 +151,7 @@ export default function LoginPage() {
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-center lg:group-hover:justify-start  text-gray-600 hover:text-[#990000] transition-all duration-300"
+            className="w-full justify-start text-gray-600 hover:text-[#990000] transition-all duration-300"
           >
             <BarChart className="h-5 w-5 lg:mr-2" />
             <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
@@ -154,16 +160,16 @@ export default function LoginPage() {
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-center lg:group-hover:justify-start  text-gray-600 hover:text-[#990000] transition-all duration-300"
+            className="w-full justify-start text-gray-600 hover:text-[#990000] transition-all duration-300"
           >
             <Laptop className="h-5 w-5 lg:mr-2" />
             <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
-              T.I
+              Treinamentos
             </span>
           </Button>
           <Button
             variant="ghost"
-            className="mt-auto w-full justify-center lg:group-hover:justify-start  text-gray-600 hover:text-[#990000] transition-all duration-300"
+            className="mt-auto w-full justify-start text-gray-600 hover:text-[#990000] transition-all duration-300"
           >
             <Settings className="h-5 w-5 lg:mr-2" />
             <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
@@ -200,22 +206,28 @@ export default function LoginPage() {
               </Card>
             </div>
 
-            {/* Calendar */}
+            {/* Date and Event of the Day */}
             <div className="lg:col-span-4">
               <Card className="h-full">
-                <div className="bg-gradient-to-r from-[#612d2d] to-[#960505] p-4 rounded-t-md text-white text-center">
-                  <h2 className="text-xl font-bold">Calendário Corporativo</h2>
-                  <p className="text-sm opacity-90">Eventos e datas importantes</p>
+                <div className="bg-gradient-to-r from-[#612d2d] to-[#960505] p-4 rounded-t-md text-white">
+                  <h2 className="text-2xl font-bold text-center">Hoje</h2>
                 </div>
-                <div className="flex justify-center p-4">
-                  <Calendar
-                    mode="single"
-                    className="rounded-md"
-                    classNames={{
-                      day_selected: "bg-[#990000] text-white hover:bg-[#cc0000]",
-                      day_today: "bg-[#990000]/10 text-[#990000]",
-                    }}
-                  />
+                <div className="p-6 space-y-4">
+                  <div className="text-center">
+                    <p className="text-3xl font-bold text-gray-800">
+                      {new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" })}
+                    </p>
+                    <p className="text-xl text-gray-600 capitalize">
+                      {new Date().toLocaleDateString("pt-BR", { weekday: "long" })}
+                    </p>
+                  </div>
+                  <div className="border-t pt-4">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Evento do Dia</h3>
+                    <div className="bg-[#990000]/10 p-3 rounded-md">
+                      <p className="text-[#990000] font-medium">Reunião de Planejamento Trimestral</p>
+                      <p className="text-sm text-gray-600">14:00 - Sala de Conferências</p>
+                    </div>
+                  </div>
                 </div>
               </Card>
             </div>
@@ -267,7 +279,7 @@ export default function LoginPage() {
                       <Button
                         key={label}
                         variant="outline"
-                        className="flex flex-col items-center justify-center p-3"
+                        className="flex flex-col items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                         style={{ height: "126px", width: "100%" }}
                       >
                         <Icon style={{ width: "48px", height: "48px" }} className="text-[#990000]" />
@@ -287,10 +299,8 @@ export default function LoginPage() {
                 className="fixed bottom-6 right-6 h-16 w-16 rounded-full bg-[#990000] p-0 text-white shadow-lg hover:bg-[#cc0000] focus:ring-2 focus:ring-[#990000] focus:ring-offset-2"
               >
                 <Bell className="h-8 w-8" />
-                <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white outline outline-1 text-xs font-bold text-[#990000]">
+                <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-[#990000]">
                   {notifications.length}
-                </span>
-                <span className="absolute animate-ping -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-[#990000]">
                 </span>
               </Button>
             </SheetTrigger>
