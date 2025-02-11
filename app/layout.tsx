@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: "Intraflex",
+  title: "I n t r a f l e x :: RedeFlex",
 }
 
 export default function RootLayout({

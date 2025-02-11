@@ -15,6 +15,11 @@ import {
   BarChart,
   Laptop,
   Menu,
+  User,
+  ChartNoAxesColumn,
+  Calendar,
+  Database,
+
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import {
@@ -24,8 +29,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Radial } from "@/components/radial";
-import { Abertofechado } from "@/components/aberto-fechado";
 
 type Notification = {
   id: number;
@@ -34,7 +37,7 @@ type Notification = {
   date: string;
 };
 
-export default function dashboard() {
+export default function LoginPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([
@@ -94,6 +97,26 @@ export default function dashboard() {
       category: "Comunicados",
       image: "/placeholder.svg?height=200&width=400",
     },
+    {
+        id: 4,
+        title: "Comunicado de instabilidade",
+        date: "4 dias atrás",
+        category: "Instabilidade",
+        image: "/placeholder.svg?height=200&width=400",
+      },
+      {
+        id: 5,
+        title: "TI-Informa",
+        date: "4 dias atrás",
+        category: "Comunicados",
+        image: "/placeholder.svg?height=200&width=400",
+      },{
+        id: 6,
+        title: "📢 RH INFORMA - Gerência DDD 31",
+        date: "5 dias atrás",
+        category: "RH",
+        image: "/placeholder.svg?height=200&width=400",
+      },
   ];
 
   return (
@@ -118,16 +141,9 @@ export default function dashboard() {
           </Button>
         </div>
         <div className="flex items-center gap-2">
-          <Button className="md:flex hidden bg-green-600 w-44 hover:bg-[#cc0000]">
-            Novo Chamado
+          <Button className="md:flex hidden bg-[#990000] w-44 hover:bg-[#cc0000]">
+            Login
           </Button>
-          <Button className="md:flex hidden bg-blue-600 w-44 hover:bg-[#cc0000]">
-            Abertura de OS
-          </Button>
-          <div className=" items-center justify-center gap-2 flex">
-            <span className="text-xl">Antonio</span>
-            <Button className=" bg-gray-300 rounded-full w-10 h-10"></Button>
-          </div>
           <div className="hidden md:flex items-center text-gray-600">
             <Clock className="h-5 w-5 mr-2" />
             <span>
@@ -217,7 +233,7 @@ export default function dashboard() {
           {/* geral */}
           <div className="grid gap-6 lg:grid-cols-12">
             {/* destaque */}
-            <div className="lg:col-span-6">
+            <div className="col-span-12 lg:col-span-6">
               <Card className="group h-full overflow-hidden">
                 <div className="relative h-full">
                   <Image
@@ -242,86 +258,40 @@ export default function dashboard() {
                 </div>
               </Card>
             </div>
-
-            {/* Data */}
-            <div className="lg:col-span-3">
-              <Card className="h-full">
-                <div className="bg-gradient-to-r from-[#612d2d] to-[#960505] p-4 rounded-t-md text-white">
-                  <h2 className="text-2xl font-bold text-center">Hoje</h2>
-                </div>
-                <div className="p-6 space-y-4">
-                  <div className="text-center">
-                    <p className="text-3xl font-bold text-gray-800">
-                      {new Date().toLocaleDateString("pt-BR", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </p>
-                    <p className="text-xl text-gray-600 capitalize">
-                      {new Date().toLocaleDateString("pt-BR", {
-                        weekday: "long",
-                      })}
-                    </p>
-                  </div>
-                  <div className="border-t pt-4">
-                    <div className="flex flex-row items-center justify-between">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                        Evento do Dia
-                      </h3>
-                      <div className="flex flex-row gap-1">
-                        <Badge
-                          variant="secondary"
-                          className="bg-[#990000]/10 hover:bg-[#990000]/70 h-5 hover:text-white text-[#990000]"
-                        >
-                          Empresa
-                        </Badge>
-                        <Badge
-                          variant="secondary"
-                          className="bg-gray-200 hover:bg-[#990000]/70 h-5 hover:text-white text-[#990000]"
-                        >
-                          Pessoal
-                        </Badge>
-                      </div>
-                    </div>
-                    <div className="bg-[#990000]/10 cursor-pointer p-3 mb-2 rounded-md">
-                      <p className="text-[#990000] font-medium over">
-                        3º Encontro Semestral da Tecnologia
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        14:00 - Online via Teams
-                      </p>
-                    </div>
-                    <div className="bg-gray-200 cursor-pointer p-3 rounded-md">
-                      <p className="text-[#990000] font-medium over">
-                        Reunião com Ulisses Ribeiro{" "}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        16:00 - Sala Arara-azul
-                      </p>
-                    </div>
+            <div className=" col-span-12 lg:col-span-6">
+              <div className="space-y-6">
+                <div>
+                  <h2 className="mb-4 text-xl font-bold text-gray-800">
+                    Acessos Rápidos
+                  </h2>
+                  <div className="grid lg:grid-cols-4 grid-cols-2 gap-4">
+                    {[
+                      { icon: Clock, label: "Ponto" },
+                      { icon: BookOpen, label: "UniFlex" },
+                      { icon: MessageSquare, label: "Comunicações" },
+                      { icon: Bell, label: "Scrum" },
+                      { icon: User, label: "Portal do Cliente"},
+                      { icon: ChartNoAxesColumn, label: "Reports"},
+                      { icon: Calendar, label:"Calendario Corporativo" },
+                      { icon: Database, label:"SGV"}
+                    ].map(({ icon: Icon, label }) => (
+                      <Button
+                        key={label}
+                        variant="outline"
+                        className="flex flex-col items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                        style={{ height: "170px", width: "100%" }}
+                      >
+                        <Icon
+                          style={{ width: "48px", height: "48px" }}
+                          className="text-[#990000]"
+                        />
+                        <span className="mt-2 text-base font-medium">
+                          {label}
+                        </span>
+                      </Button>
+                    ))}
                   </div>
                 </div>
-              </Card>
-            </div>
-            <div className="lg:col-span-3">
-              <div className="flex-col flex">
-                <Radial></Radial>
-              </div>
-              <div className="flex-row flex mt-2 gap-3 ">
-                <Card className="flex cursor-pointer flex-col h-[150px] transition-all hover:shadow-lg items-center justify-center w-full p-4">
-                  <div className="font-bold text-center">Abertos</div>
-                  <div className="font-bold text-center">hoje</div>
-                  <div className="text-4xl mt-2">9</div>
-                </Card>
-                <Card className="flex cursor-pointer flex-col gap-2 transition-all hover:shadow-lg items-center justify-center w-full p-4">
-                  <div className="font-bold text-center">Encerrados hoje</div>
-                  <div className="text-4xl">15</div>
-                </Card>
-                <Card className="flex cursor-pointer flex-col gap-2 transition-all hover:shadow-lg items-center justify-center w-full p-4">
-                  <div className="font-bold text-center">Total em Aberto</div>
-                  <div className="text-4xl">115</div>
-                </Card>
               </div>
             </div>
           </div>
@@ -329,12 +299,14 @@ export default function dashboard() {
           {/* Noticias */}
           <div className="grid gap-6 lg:grid-cols-12">
             {/* Cards */}
-            <div className=" col-span-12 lg:col-span-6">
+            <div className=" col-span-12 lg:col-span-12">
               <div className="h-8 flex flex-row items-center justify-between">
                 <h1 className="text-xl font-semibold">Noticias</h1>
-                <a href="/" className="hover:underline text-gray-500">Ver Mais...</a>
+                <a href="/" className="hover:underline text-gray-500">
+                  Ver Mais...
+                </a>
               </div>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
                 {news.map((item) => (
                   <Card
                     key={item.id}
@@ -369,77 +341,7 @@ export default function dashboard() {
             </div>
 
             {/* Acessos rapidos */}
-            <div className=" col-span-12 lg:col-span-3">
-              <div className="space-y-6">
-                <div>
-                  <h2 className="mb-4 text-xl font-bold text-gray-800">
-                    Acessos Rápidos
-                  </h2>
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { icon: Clock, label: "Ponto" },
-                      { icon: BookOpen, label: "UniFlex" },
-                      { icon: MessageSquare, label: "Comunicações" },
-                      { icon: Bell, label: "Scrum" },
-                    ].map(({ icon: Icon, label }) => (
-                      <Button
-                        key={label}
-                        variant="outline"
-                        className="flex flex-col items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                        style={{ height: "125px", width: "100%" }}
-                      >
-                        <Icon
-                          style={{ width: "48px", height: "48px" }}
-                          className="text-[#990000]"
-                        />
-                        <span className="mt-2 text-base font-medium">
-                          {label}
-                        </span>
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-span-12 lg:col-span-3">
-              <div>
-                <Abertofechado></Abertofechado>
-              </div>
-            </div>
           </div>
-          {/* notificacao */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                className="fixed bottom-6 right-6 h-16  w-16 z-10 rounded-full bg-[#990000] p-0 text-white shadow-lg hover:bg-[#cc0000] focus:ring-2 focus:ring-[#990000] focus:ring-offset-2"
-              >
-                <Bell className="h-8 w-8" />
-                <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-[#990000]">
-                  {notifications.length}
-                </span>
-                <span className="absolute -right-2 animate-ping z-0 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-800 text-xs font-bold text-[#990000]"></span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Notificações</SheetTitle>
-              </SheetHeader>
-              <div className="mt-4 space-y-4">
-                {notifications.map((notification) => (
-                  <div key={notification.id} className="border-b pb-2">
-                    <h3 className="font-semibold">{notification.title}</h3>
-                    <p className="text-sm text-gray-600">
-                      {notification.description}
-                    </p>
-                    <span className="text-xs text-gray-400">
-                      {notification.date}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
         </div>
       </main>
     </div>

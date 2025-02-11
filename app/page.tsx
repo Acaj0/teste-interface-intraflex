@@ -1,8 +1,8 @@
-"use client"
-import Image from "next/image"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+"use client";
+import Image from "next/image";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Clock,
   BookOpen,
@@ -15,22 +15,26 @@ import {
   BarChart,
   Laptop,
   Menu,
-} from "lucide-react"
-import { useState, useEffect } from "react"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+} from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
-// Add this type for notifications
 type Notification = {
-  id: number
-  title: string
-  description: string
-  date: string
-}
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+};
 
 export default function LoginPage() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  // Add state for notifications
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
@@ -44,27 +48,27 @@ export default function LoginPage() {
       description: "Reunião de equipe às 14h",
       date: "Há 1 hora",
     },
-  ])
-  const [currentTime, setCurrentTime] = useState(new Date())
+  ]);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 60000)
-    return () => clearInterval(timer)
-  }, [])
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 1024)
+      setIsMobile(window.innerWidth < 1024);
       if (window.innerWidth >= 1024) {
-        setIsSidebarOpen(true)
+        setIsSidebarOpen(true);
       } else {
-        setIsSidebarOpen(false)
+        setIsSidebarOpen(false);
       }
-    }
-    checkIsMobile()
-    window.addEventListener("resize", checkIsMobile)
-    return () => window.removeEventListener("resize", checkIsMobile)
-  }, [])
+    };
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   const news = [
     {
@@ -88,34 +92,46 @@ export default function LoginPage() {
       category: "Comunicados",
       image: "/placeholder.svg?height=200&width=400",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen">
-      {/* Top Navbar */}
+      {/* navbar */}
       <header className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b bg-white px-4">
         <div className="flex items-center gap-4">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logomarca-GqGQTqpeOjQQkB5B8KIVcRrsfcz6vm.png"
+            src="logomarca.png"
             alt="redeFlex Logo"
             width={80}
             height={24}
             className="h-auto w-52"
           />
-          <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="lg:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="lg:hidden"
+          >
             <Menu className="h-6 w-6" />
           </Button>
         </div>
         <div className="flex items-center gap-2">
-          <Button className="md:flex hidden bg-[#990000] w-44 hover:bg-[#cc0000]">Login</Button>
+          <Button className="md:flex hidden bg-[#990000] w-44 hover:bg-[#cc0000]">
+            Login
+          </Button>
           <div className="hidden md:flex items-center text-gray-600">
             <Clock className="h-5 w-5 mr-2" />
-            <span>{currentTime.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span>
+            <span>
+              {currentTime.toLocaleTimeString("pt-BR", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
           </div>
         </div>
       </header>
 
-      {/* Left Sidebar */}
+      {/* barra da esquerda */}
       <aside
         className={`fixed left-0 top-16 z-40 h-[calc(100vh-4rem)] w-16 border-r bg-white transition-all duration-300 ease-in-out group ${
           isMobile && !isSidebarOpen ? "-translate-x-full" : "translate-x-0"
@@ -127,9 +143,11 @@ export default function LoginPage() {
             className="w-full justify-start text-gray-600 hover:text-[#990000] transition-all duration-300"
           >
             <Home className="h-5 w-5 lg:mr-2" />
-            <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
-              Início
-            </span>
+            <a href="/">
+              <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
+                Início
+              </span>
+            </a>
           </Button>
           <Button
             variant="ghost"
@@ -163,9 +181,11 @@ export default function LoginPage() {
             className="w-full justify-start text-gray-600 hover:text-[#990000] transition-all duration-300"
           >
             <Laptop className="h-5 w-5 lg:mr-2" />
-            <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
-              Treinamentos
-            </span>
+            <a href="/dashboard">
+              <span className="hidden overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 delay-150 lg:group-hover:inline lg:group-hover:opacity-100">
+                T.I
+              </span>
+            </a>
           </Button>
           <Button
             variant="ghost"
@@ -179,13 +199,16 @@ export default function LoginPage() {
         </nav>
       </aside>
 
-      {/* Main Content */}
-      <main className={`mt-16 bg-[#f8f9fa] min-h-screen p-6 transition-all duration-300 ${isMobile ? "" : "ml-16"}`}>
-        <div className="mx-auto max-w-7xl space-y-6">
-          {/* Top Grid: Featured News + Calendar */}
+      <main
+        className={`mt-16 bg-[#f8f9fa] min-h-screen p-6 transition-all duration-300 ${
+          isMobile ? "" : "ml-16"
+        }`}
+      >
+        <div className="mx-auto space-y-6">
+          {/* geral */}
           <div className="grid gap-6 lg:grid-cols-12">
-            {/* Featured News */}
-            <div className="lg:col-span-8">
+            {/* destaque */}
+            <div className="col-span-12 lg:col-span-8">
               <Card className="group h-full overflow-hidden">
                 <div className="relative h-full">
                   <Image
@@ -198,15 +221,20 @@ export default function LoginPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                     <div className="absolute bottom-6 left-6 right-6">
                       <Badge className="mb-4 bg-[#990000]">Destaque</Badge>
-                      <h2 className="mb-2 text-2xl font-bold text-white">Inauguração do novo centro de inovação</h2>
-                      <p className="text-gray-200">Um novo espaço dedicado à inovação e desenvolvimento tecnológico</p>
+                      <h2 className="mb-2 text-2xl font-bold text-white">
+                        Inauguração do novo centro de inovação
+                      </h2>
+                      <p className="text-gray-200">
+                        Um novo espaço dedicado à inovação e desenvolvimento
+                        tecnológico
+                      </p>
                     </div>
                   </div>
                 </div>
               </Card>
             </div>
 
-            {/* Date and Event of the Day */}
+            {/* Data */}
             <div className="lg:col-span-4">
               <Card className="h-full">
                 <div className="bg-gradient-to-r from-[#612d2d] to-[#960505] p-4 rounded-t-md text-white">
@@ -215,37 +243,52 @@ export default function LoginPage() {
                 <div className="p-6 space-y-4">
                   <div className="text-center">
                     <p className="text-3xl font-bold text-gray-800">
-                      {new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" })}
+                      {new Date().toLocaleDateString("pt-BR", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
                     </p>
                     <p className="text-xl text-gray-600 capitalize">
-                      {new Date().toLocaleDateString("pt-BR", { weekday: "long" })}
+                      {new Date().toLocaleDateString("pt-BR", {
+                        weekday: "long",
+                      })}
                     </p>
                   </div>
                   <div className="border-t pt-4">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Evento do Dia</h3>
-                    <div className="bg-[#990000]/10 p-3 rounded-md">
-                      <p className="text-[#990000] font-medium">Reunião de Planejamento Trimestral</p>
-                      <p className="text-sm text-gray-600">14:00 - Sala de Conferências</p>
-                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                      Evento do Dia
+                    </h3>
+                    <div className="items-center flex mt-16 justify-center h-full w-full">
+                    <a href="/dashboard" className="text-gray-500 text-center hover:text-gray-400 hover:underline">Entre para ver seus eventos de hoje</a></div>
                   </div>
                 </div>
               </Card>
             </div>
           </div>
 
-          {/* News Grid */}
+          {/* Noticias */}
           <div className="grid gap-6 lg:grid-cols-12">
-            {/* News Cards */}
-            <div className="lg:col-span-8">
+            {/* Cards */}
+            <div className=" col-span-12 lg:col-span-8">
+              <div className="h-8 flex flex-row items-center justify-between">
+                <h1 className="text-xl font-semibold">Noticias</h1>
+                <a href="/" className="hover:underline text-gray-500">
+                  Ver Mais...
+                </a>
+              </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {news.map((item) => (
-                  <Card key={item.id} className="overflow-hidden transition-all hover:shadow-lg">
+                  <Card
+                    key={item.id}
+                    className="overflow-hidden transition-all hover:shadow-lg"
+                  >
                     <Image
                       src={item.image || "/placeholder.svg"}
                       alt={item.title}
                       width={400}
                       height={200}
-                      className="h-48 w-full object-cover"
+                      className="h-40 w-full object-cover"
                     />
                     <div className="p-4">
                       <div className="mb-2 flex items-center justify-between">
@@ -255,20 +298,26 @@ export default function LoginPage() {
                         >
                           {item.category}
                         </Badge>
-                        <span className="text-sm text-gray-500">{item.date}</span>
+                        <span className="text-sm text-gray-500">
+                          {item.date}
+                        </span>
                       </div>
-                      <h3 className="line-clamp-2 text-lg font-semibold text-gray-800">{item.title}</h3>
+                      <h3 className="line-clamp-2 text-lg font-semibold text-gray-800">
+                        {item.title}
+                      </h3>
                     </div>
                   </Card>
                 ))}
               </div>
             </div>
 
-            {/* Quick Access Icons */}
-            <div className="lg:col-span-4">
+            {/* Acessos rapidos */}
+            <div className=" col-span-12 lg:col-span-4">
               <div className="space-y-6">
                 <div>
-                  <h2 className="mb-4 text-xl font-bold text-gray-800">Acessos Rápidos</h2>
+                  <h2 className="mb-4 text-xl font-bold text-gray-800">
+                    Acessos Rápidos
+                  </h2>
                   <div className="grid grid-cols-2 gap-4">
                     {[
                       { icon: Clock, label: "Ponto" },
@@ -280,10 +329,15 @@ export default function LoginPage() {
                         key={label}
                         variant="outline"
                         className="flex flex-col items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                        style={{ height: "126px", width: "100%" }}
+                        style={{ height: "125px", width: "100%" }}
                       >
-                        <Icon style={{ width: "48px", height: "48px" }} className="text-[#990000]" />
-                        <span className="mt-2 text-base font-medium">{label}</span>
+                        <Icon
+                          style={{ width: "48px", height: "48px" }}
+                          className="text-[#990000]"
+                        />
+                        <span className="mt-2 text-base font-medium">
+                          {label}
+                        </span>
                       </Button>
                     ))}
                   </div>
@@ -291,39 +345,9 @@ export default function LoginPage() {
               </div>
             </div>
           </div>
-          {/* Floating Notifications Icon */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                className="fixed bottom-6 right-6 h-16 w-16 z-10 rounded-full bg-[#990000] p-0 text-white shadow-lg hover:bg-[#cc0000] focus:ring-2 focus:ring-[#990000] focus:ring-offset-2"
-              >
-                <Bell className="h-8 w-8" />
-                <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-[#990000]">
-                  {notifications.length}
-                </span>
-                <span className="absolute -right-2 animate-ping z-0 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-[#990000]">
-                </span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Notificações</SheetTitle>
-              </SheetHeader>
-              <div className="mt-4 space-y-4">
-                {notifications.map((notification) => (
-                  <div key={notification.id} className="border-b pb-2">
-                    <h3 className="font-semibold">{notification.title}</h3>
-                    <p className="text-sm text-gray-600">{notification.description}</p>
-                    <span className="text-xs text-gray-400">{notification.date}</span>
-                  </div>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+          
         </div>
       </main>
     </div>
-  )
+  );
 }
-
