@@ -97,7 +97,7 @@ export default function dashboard() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-y-hidden">
       {/* navbar */}
       <header className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b bg-white px-4">
         <div className="flex items-center gap-4">
@@ -209,7 +209,7 @@ export default function dashboard() {
       </aside>
 
       <main
-        className={`mt-16 bg-[#f8f9fa] min-h-screen p-6 transition-all duration-300 ${
+        className={`mt-16 bg-[#f8f9fa] lg:h-[calc(100vh-4rem)] flex items-center p-6 transition-all duration-300 ${
           isMobile ? "" : "ml-16"
         }`}
       >
