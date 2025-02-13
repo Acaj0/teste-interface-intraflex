@@ -14,6 +14,8 @@ import {
   Mail,
   BarChart,
   Laptop,
+  ChevronDown,
+  Icon,
   Menu,
 } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -26,6 +28,21 @@ import {
 } from "@/components/ui/sheet";
 import { Radial } from "@/components/radial";
 import { Abertofechado } from "@/components/aberto-fechado";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 type Notification = {
   id: number;
@@ -209,12 +226,13 @@ export default function dashboard() {
       </aside>
 
       <main
-        className={`mt-16 bg-[#f8f9fa] lg:h-[calc(100vh-4rem)] flex items-center p-6 transition-all duration-300 ${
+        className={`mt-16 bg-[#f8f9fa] lg:h-[calc(100vh-4rem)] overflow-y-scroll flex p-6 transition-all duration-300 ${
           isMobile ? "" : "ml-16"
         }`}
       >
         <div className="mx-auto space-y-6">
           {/* geral */}
+
           <div className="grid gap-6 lg:grid-cols-12">
             {/* destaque */}
             <div className="lg:col-span-6">
@@ -332,7 +350,9 @@ export default function dashboard() {
             <div className=" col-span-12 lg:col-span-6">
               <div className="h-8 flex flex-row items-center justify-between">
                 <h1 className="text-xl font-semibold">Noticias</h1>
-                <a href="/" className="hover:underline text-gray-500">Ver Mais...</a>
+                <a href="/" className="hover:underline text-gray-500">
+                  Ver Mais...
+                </a>
               </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {news.map((item) => (
@@ -407,6 +427,7 @@ export default function dashboard() {
               </div>
             </div>
           </div>
+
           {/* notificacao */}
           <Sheet>
             <SheetTrigger asChild>
@@ -440,6 +461,27 @@ export default function dashboard() {
               </div>
             </SheetContent>
           </Sheet>
+          <div className="flex flex-col">
+            <div className="text-gray-400/80 flex flex-row w-full items-center">
+              <h1 className="text-2xl text-center w-60">Modulos do Setor</h1>
+              <ChevronDown/>
+              <div className="bg-gray-400/40 w-full ml-2 h-[3px] rounded-full"></div>
+            </div>
+            <div className="grid gap-6 lg:grid-cols-12 mb-4 mt-4">
+              
+              <Card className=" col-span-4 h-12 rounded">
+              <Image alt="teste" width={1500} height={100} src={"/fiscais.png"}></Image>
+
+              </Card>
+              <Card className=" col-span-8">
+                <Image alt="teste" width={1500} height={100} src={"/plano.png"}></Image>
+              </Card>
+              <div className="col-span-4"></div>
+              <Card className=" col-span-8">
+                <Image alt="teste" width={1500} height={100} src={"/pendente.png"}></Image>
+              </Card>
+            </div>
+          </div>
         </div>
       </main>
     </div>

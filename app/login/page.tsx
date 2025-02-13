@@ -179,11 +179,11 @@ export default function LoginPage() {
                 </div>
               </div>
             </div>
-
+            
             <Card className="group overflow-hidden">
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=400&width=800"
+                  src="/1.jpg"
                   alt="Featured News"
                   width={800}
                   height={400}
