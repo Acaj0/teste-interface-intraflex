@@ -17,6 +17,7 @@ import {
   ChevronDown,
   Icon,
   Menu,
+  Eye,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import {
@@ -43,6 +44,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type Notification = {
   id: number;
@@ -464,22 +466,145 @@ export default function dashboard() {
           <div className="flex flex-col">
             <div className="text-gray-400/80 flex flex-row w-full items-center">
               <h1 className="text-2xl text-center w-60">Modulos do Setor</h1>
-              <ChevronDown/>
+              <ChevronDown />
               <div className="bg-gray-400/40 w-full ml-2 h-[3px] rounded-full"></div>
             </div>
             <div className="grid gap-6 lg:grid-cols-12 mb-4 mt-4">
-              
-              <Card className=" col-span-4 h-12 rounded">
-              <Image alt="teste" width={1500} height={100} src={"/fiscais.png"}></Image>
-
-              </Card>
-              <Card className=" col-span-8">
-                <Image alt="teste" width={1500} height={100} src={"/plano.png"}></Image>
-              </Card>
+              <div className="col-span-4">
+                <Card className="p-4">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-12"></TableHead>
+                        <TableHead>Obrigações Fiscais</TableHead>
+                        <TableHead>Data</TableHead>
+                        <TableHead className="w-12"></TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>
+                          <Checkbox />
+                        </TableCell>
+                        <TableCell>
+                          <div>
+                            <span>DIS</span>
+                            <span className="text-sm text-muted-foreground ml-2">
+                              (VERIKA OLIVEIRA CALASSA)
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell>25/02/2025</TableCell>
+                        <TableCell>
+                          <Button variant="ghost" size="icon">
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </Card>
+              </div>
+              <div className="col-span-8">
+                <Card className="p-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg font-semibold">Plano de Ação</h2>
+                    <Badge className="bg-blue-500 hover:bg-blue-600">
+                      Todos
+                    </Badge>
+                  </div>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-[50%]">Descrição</TableHead>
+                        <TableHead>Data</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Última Atualização</TableHead>
+                        <TableHead>Data Cadastro</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium">
+                          Otimizar HC Estrutura de vendedor com o Tombamento dos
+                          clientes definidos em Redir - 4 vendedores
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant="outline"
+                            className="bg-red-50 text-red-500 hover:bg-red-100"
+                          >
+                            20/05/2019
+                          </Badge>
+                        </TableCell>
+                        <TableCell>Andamento</TableCell>
+                        <TableCell>04/06/2019</TableCell>
+                        <TableCell>28/04/2019</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">
+                          Atualizar Rotinas de Apuração do CPC 06 do ano de 2023
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant="outline"
+                            className="bg-red-50 text-red-500 hover:bg-red-100"
+                          >
+                            20/05/2019
+                          </Badge>
+                        </TableCell>
+                        <TableCell>Andamento</TableCell>
+                        <TableCell>-</TableCell>
+                        <TableCell>08/08/2023</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </Card>
+              </div>
               <div className="col-span-4"></div>
-              <Card className=" col-span-8">
-                <Image alt="teste" width={1500} height={100} src={"/pendente.png"}></Image>
-              </Card>
+              <div className="col-span-8">
+                <Card className="p-4">
+                  <h2 className="text-lg font-semibold mb-4">
+                    Processos de Compra Pendentes de Aprovação
+                  </h2>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Id Processo</TableHead>
+                        <TableHead>Empresa</TableHead>
+                        <TableHead>Filial</TableHead>
+                        <TableHead>Data Atualização</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>RC01305-02</TableCell>
+                        <TableCell>00001 - REDEFLEX</TableCell>
+                        <TableCell>
+                          00001 - REDEFLEX - CUIABÁ-MT - DDD 65
+                        </TableCell>
+                        <TableCell>27/11/2023</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>RC01306-02</TableCell>
+                        <TableCell>00001 - REDEFLEX</TableCell>
+                        <TableCell>
+                          00001 - REDEFLEX - CUIABÁ-MT - DDD 65
+                        </TableCell>
+                        <TableCell>27/11/2023</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>RC01302-02</TableCell>
+                        <TableCell>00001 - REDEFLEX</TableCell>
+                        <TableCell>
+                          00001 - REDEFLEX - CUIABÁ-MT - DDD 65
+                        </TableCell>
+                        <TableCell>28/11/2023</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
