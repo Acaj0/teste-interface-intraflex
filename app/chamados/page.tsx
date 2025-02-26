@@ -293,15 +293,35 @@ export default function TicketForm() {
                     <p className="text-sm text-muted-foreground">Anexe capturas de tela ou arquivos relevantes</p>
                   </div>
                 </div>
-
+                <div className="space-y-2 w-96 ">
+                    <Label htmlFor="system">
+                    Prioridade <span className="text-red-500">*</span>
+                    </Label>
+                    <Select required>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione a prioridade" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Baixa">Baixa</SelectItem>
+                        <SelectItem value="Media">Media</SelectItem>
+                        <SelectItem value="Alta">Alta</SelectItem>
+                        <SelectItem value="Muito Alta">Muito Alta</SelectItem>
+                        <SelectItem value="Critica">Critica</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 {/* Público */}
-                <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+                
+                <div className="flex flex-row items-center justify-between rounded-lg  w-96 border p-4">
                   <div className="space-y-0.5">
                     <Label>Público</Label>
                     <p className="text-sm text-muted-foreground">Qualquer usuário com o link poderá visualizar</p>
                   </div>
                   <Switch />
                 </div>
+
+                
+                
 
                 {/* Buttons */}
                 <div className="flex gap-4">
